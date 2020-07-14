@@ -14,13 +14,31 @@ const SearchResults = () => {
   const { language } = useContext(LanguageContext);
 
   const filterStatus = (pokemon) => {
-    for (let i = 0; i <= pokemons.length; i++) {
-      if (pokemon.type.includes(statusType[i])) {
-        return pokemon;
-      } else {
-        return pokemons;
-      }
+    if (statusType.length === 0) {
+      return pokemons;
     }
+    for (let status of statusType) {
+      if (!pokemon.type.includes(status)) {
+        return false;
+      } else {
+        return pokemon.type.some((type) => (type = status));
+      }
+
+      // if (!pokemon.type.includes(status)) {
+      //   return false;
+      // }
+      // if (statusType.every(pokemon.type)) {
+      //   return true;
+      // }
+    }
+
+    // for (let i = 0; i <= pokemons.length; i++) {
+    //   if (pokemon.type.includes(statusType[i])) {
+    //     return pokemon;
+    //   } else {
+    //     return pokemons;
+    //   }
+    // }
   };
 
   const ordenarPokemons = (a, b) => b[ordenPokemons] < a[ordenPokemons];
